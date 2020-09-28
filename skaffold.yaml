@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+metadata:
+  name: greeting-service
+build:
+  artifacts:
+  - image: perrinsjason/demo-greeting-service
+    jib:
+      project: com.perrinsjason:greeting-service
+deploy:
+  kubectl:
+    manifests:
+    - k8s/greetings-service-deployment.yaml
