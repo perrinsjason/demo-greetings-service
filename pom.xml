@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.perrinsjason</groupId>
     <artifactId>greeting-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>greeting-service</name>
     <description>Demo project for Spring Boot</description>
 
@@ -82,7 +82,7 @@
                     <to>
                         <!--<image>localhost:5000/serverless</image>-->
                         <image>registry.hub.docker.com/perrinsjason/demo-greeting-service</image>
-                        <credHelper>desktop</credHelper>
+                        <!--<credHelper>desktop</credHelper>-->
                         <tags>
                             <tag>${project.version}</tag>
                             <tag>latest</tag>
@@ -98,14 +98,14 @@
                         </labels>
                     </container>
                 </configuration>
-                <executions>
+               <!-- <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 
         </plugins>
