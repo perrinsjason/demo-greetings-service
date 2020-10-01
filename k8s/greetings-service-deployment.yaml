@@ -34,7 +34,7 @@ metadata:
 spec:
   selector:
     app: greeting-service
-  type: NodePort # default is cluster IP, setting to allow direct access
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8080
@@ -51,7 +51,7 @@ metadata:
 spec:
   selector:
     app: greeting-service
-  type: NodePort # default is cluster IP, setting to allow direct access
+  type: NodePort
   ports:
     - protocol: TCP
       port: 7070
