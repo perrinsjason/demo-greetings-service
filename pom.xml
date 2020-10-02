@@ -66,17 +66,17 @@
 
     <build>
         <plugins>
-           <!-- <plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
+          <!--      <executions>
                     <execution>
                         <goals>
                             <goal>build-image</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>-->
+                </executions>-->
+            </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
