@@ -3,7 +3,7 @@ name: Manual Release
 on: 
   workflow_dispatch:
     inputs:
-      logLevel:
+      release:
         version: 'Version'     
         required: true
         default: '1.0.0'
