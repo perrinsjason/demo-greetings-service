@@ -114,4 +114,12 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Demo greetings service</name>
+            <url>https://maven.pkg.github.com/perrinsjason/demo-greetings-service</url>
+        </repository>
+    </distributionManagement>
+
 </project>
