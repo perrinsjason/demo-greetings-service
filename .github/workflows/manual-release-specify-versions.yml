@@ -1,12 +1,12 @@
-name: Manual Release
+name: Manual Release - Specify versions
 
 on: 
   workflow_dispatch:
     inputs:
-      release:
-        version: 'Version'     
+      dVersion:
+        description: 'Development Version'
         required: true
-        default: '1.0.0'
+        default: '1.0.0-SNAPSHOT'
       tags:
         description: 'Release'  
 
@@ -35,13 +35,12 @@ jobs:
           git config --global author.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global author.name "${GITHUB_ACTOR}":  
       - name: Prepare and perform release
-        run: mvn -B release:prepare release:perform
+        run: mvn -B release:prepare release:perform release:update-versions -DdevelopmentVersion=${{ github.event.inputs.dVersion }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Rollback if failure
         if: ${{ failure() }}
         run: mvn --batch-mode release:rollback
-
 
   artifact:
     name: Publish - GitHub Packages
@@ -59,26 +58,26 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn deploy -Dregistry=https://maven.pkg.github.com/perrinsjason -Dtoken=GITHUB_TOKEN
 
-  docker:
-    name: Publish - Docker Hub
-    runs-on: ubuntu-latest
-    needs: [release]
-    env:
-      REPO: ${{ secrets.DOCKER_REPO }}
+    docker:
+      name: Publish - Docker Hub
+      runs-on: ubuntu-latest
+      needs: [release]
+      env:
+        REPO: ${{ secrets.DOCKER_REPO }}
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11.0.4
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: JIB Build Docker image
-        run: mvn compile jib:build
+      steps:
+        - uses: actions/checkout@v2
+        - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11.0.4
+        - name: Cache local Maven repository
+          uses: actions/cache@v2
+          with:
+            path: ~/.m2/repository
+            key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-maven-
+        - name: Login to Docker Hub
+          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+        - name: JIB Build Docker image
+          run: mvn compile jib:build
