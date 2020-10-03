@@ -90,7 +90,7 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
       - name: JIB Build Docker image     
-        run: mvn compile jib:dockerBuild  
+        run: mvn compile jib:build  
           
 
 
