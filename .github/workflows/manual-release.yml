@@ -32,3 +32,6 @@ jobs:
         run: ./mvnw -B release:prepare release:perform
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Rollback if failure
+        if: ${{ failure() }}
+        run: ./mvnw --batch-mode release:rollback
