@@ -28,8 +28,7 @@ jobs:
         with:
           java-version: 14
           server-id: github
-      - name: pER
-        id: Prepare and perform release
+      - name: Prepare and perform release
         run: mvn -B release:prepare release:perform
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
