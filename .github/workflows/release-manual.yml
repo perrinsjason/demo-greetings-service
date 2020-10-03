@@ -1,16 +1,8 @@
-name: Manual Release
+name: Release (Manual)
 
 on: 
   workflow_dispatch:
-    inputs:
-      release:
-        version: 'Version'     
-        required: true
-        default: '1.0.0'
-      tags:
-        description: 'Release'  
-
-
+  
 jobs:
   release:
     runs-on: ubuntu-latest
