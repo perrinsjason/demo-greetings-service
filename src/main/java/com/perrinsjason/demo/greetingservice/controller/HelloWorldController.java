@@ -14,4 +14,14 @@ public class HelloWorldController {
     public String helloWorld( @Value("${application.version}") String appVersion){
         return "Hello World! "+appVersion;
     }
+
+    @GetMapping("/hi")
+    public String hi(){
+        return "Hi World! ";
+    }
+
+    @GetMapping("")
+    public String ServiceUp(){
+        return "Hi there, service is up! ";
+    }
 }
