@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: rest-greeting-service
+              servicePort: 8080
+
+          - path: /greeting
+            backend:
+              serviceName: rest-greeting-service
+              servicePort: 8080
+          - path: /greeting/flux
+            backend:
+              serviceName: rest-greeting-service
+              servicePort: 8080
+          - path: /rsocket
+            backend:
+              serviceName: rsocket-greeting-service
+              servicePort: 7070
